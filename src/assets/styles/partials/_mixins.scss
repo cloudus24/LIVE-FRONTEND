@@ -1,0 +1,232 @@
+/// Mixin to manage responsive breakpoints
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints-min
+/// @require $breakpoints-max
+
+$baseFont: 16;
+
+@function rem($pxWidths) {
+  $remValues: null;
+
+  @each $pxValue in $pxWidths {
+    $remValues: append($remValues, $pxValue / $baseFont + rem);
+  }
+  @return $remValues;
+}
+
+$breakpoints-min: (
+  "sm-min": 320px,
+  "md-min": 768px,
+  "lg-min": 1024px,
+  "xl-min": 1280px,
+) !default;
+
+$breakpoints-max: (
+  "xs-max": 319px,
+  "sm-max": 767px,
+  "md-max": 1023px,
+  "lg-max": 1279px,
+  "xl-max": 1390px,
+) !default;
+
+// Small devices
+
+// Breakpoints
+$screen-xxl-max: 1590px;
+$screen-xl-max: 1400px;
+$screen-lg-max: 1199px;
+$screen-lgm-max: 1024px;
+$screen-md-max: 991px;
+$screen-sm-max: 767px;
+$screen-xs-max: 575px;
+$screen-xxs-max: 475px;
+$screen-xxxs-max: 426px;
+$screen-tiny-max: 375px;
+$screen-min-max: 320px;
+
+// Standard Desktop devices
+@mixin xxl {
+  // max-width: 1590px
+  @media (max-width: #{$screen-xxl-max}) {
+    @content;
+  }
+}
+// Standard Desktop devices
+
+@mixin xxl {
+  // max-width: 1590px
+  @media (max-width: #{$screen-xxl-max}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  // max-width: 1400px
+  @media (max-width: #{$screen-xl-max}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin lg {
+  // max-width: 1199px
+  @media (max-width: #{$screen-lg-max}) {
+    @content;
+  }
+}
+// Medium devices
+@mixin lgm {
+  // max-width: 1024px
+  @media (max-width: #{$screen-lgm-max}) {
+    @content;
+  }
+}
+
+// 991px
+@mixin md {
+  @media (max-width: #{$screen-md-max}) {
+    @content;
+  }
+}
+
+// 767px
+@mixin sm {
+  @media (max-width: #{$screen-sm-max}) {
+    @content;
+  }
+}
+
+// 575px
+@mixin xs {
+  @media (max-width: #{$screen-xs-max}) {
+    @content;
+  }
+}
+
+// 475px
+@mixin xxs {
+  @media (max-width: #{$screen-xxs-max}) {
+    @content;
+  }
+}
+
+// 425px
+@mixin xxxs {
+  @media (max-width: #{$screen-xxxs-max}) {
+    @content;
+  }
+}
+
+// 375px
+@mixin tiny {
+  @media (max-width: #{$screen-tiny-max}) {
+    @content;
+  }
+}
+
+// 320px
+@mixin min-max {
+  @media (max-width: #{$screen-min-max}) {
+    @content;
+  }
+}
+
+@mixin breakpoint($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints-max, $breakpoint) {
+    // Prints a media query based on the value
+    @media (max-width: map-get($breakpoints-max, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @if map-has-key($breakpoints-min, $breakpoint) {
+      // Prints a media query based on the value
+      @media (min-width: map-get($breakpoints-min, $breakpoint)) {
+        @content;
+      }
+    }
+
+    // If the key doesn't exist in the map
+    @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+      +"Available breakpoints are: #{map-keys($breakpoints-min),map-keys($breakpoints-max)}.";
+    }
+  }
+}
+
+@mixin breakpoint-max-width($width) {
+  @media (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin breakpoint-min-width($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+@mixin vertical_align_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin pointer {
+  cursor: pointer;
+}
+
+@mixin svg {
+  width: rem(28);
+  height: rem(28);
+  background: getColorHex("transparent-grey");
+  border-radius: 50%;
+}
+
+
+@mixin customScroll {
+  /* Vertical Scrollbar */
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px; /* Ensure the horizontal scrollbar is also styled */
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f4f4f4;
+    border-radius: 60px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    border-radius: 60px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #a5a3a3;
+  }
+
+  /* Horizontal Scrollbar */
+  &::-webkit-scrollbar:horizontal {
+    height: 5px;
+  }
+
+  /* Horizontal Track */
+  &::-webkit-scrollbar-track:horizontal {
+    background: #f4f4f4;
+    border-radius: 60px;
+  }
+
+  /* Horizontal Handle */
+  &::-webkit-scrollbar-thumb:horizontal {
+    background: #d9d9d9;
+    border-radius: 60px;
+  }
+
+  /* Horizontal Handle on hover */
+  &::-webkit-scrollbar-thumb:horizontal:hover {
+    background: #a5a3a3;
+  }
+}

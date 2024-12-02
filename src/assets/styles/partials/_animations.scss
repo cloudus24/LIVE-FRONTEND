@@ -1,0 +1,24 @@
+@mixin transition-3s {
+  transition: $transition-time $transition-name;
+}
+
+@mixin bottom-border-animation {
+  display: block;
+  position: relative;
+  &:hover {
+    &::after {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    left: 0;
+    transform-origin: left;
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  }
+}

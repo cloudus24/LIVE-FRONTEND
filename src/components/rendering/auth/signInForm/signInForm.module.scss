@@ -1,0 +1,469 @@
+@import "../../../../assets/styles/main.scss";
+
+.mainSection {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    // background-color: beige;
+}
+
+.signInCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .signInImage {
+        width: 80%;
+        padding: 0 20px;
+
+    }
+
+    .signInImage img {
+        width: 100%;
+        height: 90vh;
+    }
+
+    .signInTitle {
+        margin-bottom: 40px;
+
+        @include xs {
+            margin-bottom: 35px;
+        }
+
+        @include xxxs {
+            margin-bottom: 32px;
+        }
+
+        @include min-max {
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: #1CC1A9;
+            text-align: center;
+            font-size: 50px;
+            @include outfit600;
+            line-height: normal;
+            margin-bottom: 40px;
+
+            @media (max-width: 1399px) {
+                font-size: 44px;
+            }
+
+            @include sm {
+                font-size: 40px;
+            }
+        }
+    }
+}
+
+.signInForm {
+    width: 400px;
+    input {
+        padding: 24px 50px 24px 20px;
+        color: black;
+        font-size: 16px;
+        width: 100%;
+        letter-spacing: 0.162px;
+        border-radius: 10px;
+        border: 1px solid #e4e2e2;
+        background: #fff;
+        outline: unset;
+        margin-bottom: 40px;
+        z-index: 9999;
+
+
+        @include sm {
+            margin-bottom: 35px;
+            padding: 20px 50px 20px 15px;
+        }
+
+        @include xs {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        @include xxs {
+            margin-bottom: 20px;
+            padding: 17px 50px 20px 15px;
+        }
+
+        @include xxxs {
+            padding: 16px 45px 16px 15px;
+            margin-bottom: 18px;
+            border-radius: 8px;
+        }
+
+        @include tiny {
+            font-size: 15px;
+            padding: 10px 35px 10px 10px;
+        }
+
+
+
+        ::placeholder {
+            color: #949494;
+            // @include outfit400;
+            font-size: 16px;
+        }
+
+        &:focus {
+            box-shadow: unset !important;
+            border: 1px solid #1CC1A9;
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            @media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
+                font-size: 16px !important;
+            }
+        }
+    }
+
+    .SignUpPasswordSection {
+        position: relative;
+
+        input {
+            margin-bottom: 20px !important;
+
+            @include tiny {
+                margin-bottom: 15px !important;
+            }
+        }
+
+        .passwordEyeSection {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            img {
+                height: 25px;
+                width: 24px;
+
+                @include xxxs {
+                    height: 22px;
+                    width: 22px;
+
+                }
+
+                @include tiny {
+                    height: 20px;
+                    width: 20px;
+
+                }
+            }
+
+            @include xxxs {
+                right: 15px;
+            }
+
+            @include tiny {
+                right: 10px;
+            }
+        }
+    }
+
+    .passwordForgotSection {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 0px 20px;
+
+        @include xxxs {
+            padding: 0 9px;
+            justify-content: center;
+        }
+
+        label {
+            color: #0b1f15;
+            font-size: 16px;
+            @include outfit500;
+            line-height: 24px;
+            margin-bottom: 0px;
+            cursor: pointer;
+
+            @include tiny {
+                font-size: 15px;
+            }
+        }
+
+        p {
+            color: #443632;
+            font-size: 16px;
+            @include outfit500;
+            line-height: 24px;
+            margin-bottom: 0px;
+
+            @include tiny {
+                font-size: 15px;
+            }
+        }
+    }
+
+    .signUpBtnSection {
+        margin-top: 40px;
+        text-align: center;
+
+        @include lgm {
+            margin-top: 35px;
+        }
+
+        @include xs {
+            margin-top: 30px;
+        }
+
+        @include xxxs {
+            margin-top: 25px;
+        }
+
+        @include tiny {
+            margin-top: 20px;
+        }
+
+        button {
+            border-radius: 10px;
+            background: var(--1, linear-gradient(90deg, #1CC1A9 0%, #06d37e 100%));
+            padding: 16px 35px;
+            color: #fff;
+            text-align: center;
+            font-size: 18px;
+            @include outfit500;
+            letter-spacing: 0.162px;
+            margin-bottom: 0px;
+            outline: unset;
+            border: unset;
+            width: 400px;
+
+            &:hover {
+                background: linear-gradient(90deg, #06d37e 0%, #1CC1A9 100%);
+                border-radius: 10px;
+            }
+
+            @include lg {
+                padding: 20px 65px;
+            }
+
+            @include sm {
+                font-size: 17px;
+                padding: 16px 25px;
+                border-radius: 8px;
+                width: 180px;
+            }
+
+            @include xs {
+                padding: 14px 23px;
+            }
+
+            @include xxs {
+                font-size: 16px;
+                padding: 14px 14px;
+            }
+
+            @include xxxs {
+                font-size: 15px;
+                padding: 14px 10px;
+            }
+
+            @include tiny {
+                font-size: 14px;
+                padding: 13px 8px;
+                border-radius: 8px;
+                width: 160px;
+            }
+
+        }
+    }
+
+    .signAccountSection {
+        text-align: center;
+        padding: 30px 0px;
+        @include outfit400;
+        color: #000;
+
+        @include xs {
+            padding: 25px 0;
+        }
+
+        @include xxxs {
+            padding: 20px 0;
+        }
+
+        @include tiny {
+            font-size: 15px;
+        }
+
+        a {
+            color: #000;
+            font-size: 16px;
+            @include outfit400;
+            letter-spacing: 0.162px;
+
+            @include tiny {
+                font-size: 15px;
+            }
+
+            span {
+                color: #1CC1A9;
+            }
+
+            img {
+                margin-left: 5px;
+
+                @include tiny {
+                    height: 12px;
+                    width: 12px;
+                }
+            }
+        }
+    }
+
+    .deviceSection {
+        position: relative;
+        text-align: center;
+
+        span {
+            color: #949494;
+            text-align: center;
+            font-size: 18px;
+            @include outfit400;
+            letter-spacing: 0.162px;
+        }
+
+        ::before {
+            content: "";
+            position: absolute;
+            width: 144px;
+            height: 1.62px;
+            background: linear-gradient(90deg, #ffeadc 0%, #949494 100%);
+            top: 50%;
+            left: 32%;
+            transform: translate(-50%, -50%);
+
+            @include xl {
+                left: 29%;
+            }
+
+            @include lg {
+                left: 24%;
+            }
+
+            @include md {
+                left: 33%;
+            }
+
+            @media (max-width:767px) {
+                left: 35%;
+                width: 100px;
+            }
+
+            @include xs {
+                left: 33%;
+            }
+
+            @include xxs {
+                left: 27%;
+            }
+
+            @include tiny {
+                left: 24%;
+            }
+
+            @include min-max {
+                left: 22%;
+            }
+        }
+
+        ::after {
+            content: "";
+            position: absolute;
+            width: 144px;
+            height: 1.62px;
+            background: linear-gradient(90deg, #949494 0%, #ffeadc 100%);
+            top: 50%;
+            right: 8%;
+            transform: translate(-50%, -50%);
+
+            @include xl {
+                right: 0;
+            }
+
+            @include lg {
+                right: -12%;
+            }
+
+            @include md {
+                right: 10%;
+            }
+
+            @media (max-width:767px) {
+                right: 13%;
+                width: 100px;
+            }
+
+            @include xxs {
+                right: 0;
+            }
+
+            @include tiny {
+                right: -10%;
+            }
+
+            @include min-max {
+                right: -15%;
+            }
+        }
+    }
+
+    .registerMediaSection {
+        ul {
+            padding: 0px;
+            margin: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            margin-top: 20px;
+
+            @include tiny {
+                margin-top: 16px;
+            }
+
+            li {
+                list-style: none;
+
+                span {
+                    border-radius: 84.329px;
+                    border: 0.843px solid #fadacd;
+                    background: #fff;
+                    width: 50px;
+                    height: 50px;
+                    line-height: 45px;
+                    text-align: center;
+                    display: block;
+
+                    @include xxs {
+                        width: 40px;
+                        height: 40px;
+                        line-height: 35px;
+                    }
+
+                    img {
+                        width: 25px;
+                        height: 25px;
+                        object-fit: contain;
+
+                        @include xxs {
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+@mixin outfit400 {
+  font-family: var(--font-outfit-regular), sans-serif !important;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 400 !important;
+}
+
+@mixin outfit500 {
+  font-family: var(--font-outfit-medium), sans-serif !important;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 500 !important;
+}
+
+@mixin outfit600 {
+  //defalt
+  font-family: var(--font-outfit-semibold), sans-serif !important;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 600 !important;
+}
+
+@mixin outfit700 {
+  font-family: var(--font-outfit-bold), sans-serif !important;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 700 !important;
+}
+@mixin outfit900 {
+  font-family: var(--font-outfit-darkbold), sans-serif !important;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-weight: 900 !important;
+}
