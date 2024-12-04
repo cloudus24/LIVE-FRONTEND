@@ -12,11 +12,11 @@ import Link from "next/link";
 
 import Spinner from "@/components/modules/spinner";
 import { setItemInSession } from "@/utils/useHooks/useStorage";
-import { handleUserLogin, UserLoginResponse } from "@/utils/api";
+import { handleUserLogin } from "@/utils/api";
 import {
     toastError,
     toastSuccess,
-  } from "@/utils";
+} from "@/utils";
 
 const SignInForm = () => {
     const [formData, setFormData] = useState({
@@ -37,48 +37,49 @@ const SignInForm = () => {
     const togglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
     };
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
         setSuccessMessage(null);
-
+      
         try {
-            const res = await handleUserLogin({ body: formData });
+          const res = await handleUserLogin({ body: formData });
+      
+          if (res.isError) {
+            const message = typeof res.response === "string" ? res.response : "Login failed.";
+            toastError(message);
+          } else {
 
-            if (res.isError) {
-                toastError(res.response as string);
+            if (typeof res.response === "object" && res.response !== null) {
+              const { message, data, auth_token } = res.response;
+      
+              if (message && data && auth_token) {
+                console.log('message :>> ', message);
+                toastSuccess(message);
+      
+                setItemInSession("userData", data);
+      
+                nookies.set(null, "auth_token", auth_token, {
+                  path: "/",
+                  maxAge: 7 * 24 * 60 * 60, 
+                });
+                router.push("/folder");
+              } else {
+                toastError("Invalid response data.");
+              }
             } else {
-                const message = (res.response as UserLoginResponse).message;
-                const userData = (res.response as UserLoginResponse).data;
-                const auth_token = (res.response as UserLoginResponse).auth_token;
-
-                if (userData && auth_token) {
-                    console.log('message :>> ', message);
-                    toastSuccess(message);
-                    setItemInSession("userData", userData);
-                    console.log("userData :>> ", userData);
-                    nookies.set(null, "auth_token", auth_token, {
-                        path: "/",
-                        maxAge: 7 * 24 * 60 * 60,
-                    });
-
-                    router.push("/");
-                } else {
-                    toastError("Unexpected response from the server.");
-                }
+              toastError("Unexpected response format.");
             }
+          }
         } catch (error) {
-            toastError("An unexpected error occurred. Please try again.");
+          toastError("An unexpected error occurred. Please try again.");
         } finally {
-            setLoading(false);
+          setLoading(false);
         }
-    };
-
+      };
+      
+      
 
     return (
         <div>
@@ -146,7 +147,7 @@ const SignInForm = () => {
 
                                 <div className={styles.signAccountSection}>
                                     Don’t have an account ?{" "}
-                                    <Link href="/auth/signup">
+                                    <Link href="/auth/signUp">
                                         <span> Sign Up</span>
                                     </Link>
                                 </div>

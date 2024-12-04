@@ -1,14 +1,17 @@
 import { useRouter } from "next/router";
-import SingInCompoent from "@/components/rendering/auth/signInForm";
+import dynamic from "next/dynamic";
+
+const SignInComponent = dynamic(() => import('../components/rendering/auth/signInForm'), { ssr: false })
+
 
 const HomePage = () => {
-    const router = useRouter();
+  const router = useRouter();
 
-    return (
-        <>
-            <SingInCompoent />
-        </>
-    );
+  return (
+    <div>
+      <SignInComponent />
+    </div>
+  );
 };
 
 export default HomePage;

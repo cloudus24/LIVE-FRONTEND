@@ -1,0 +1,217 @@
+@import "../../../../assets/styles/main.scss";
+
+.mainOtpSection {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  }
+.signInImage {
+  width: 80%;
+  padding: 0 20px;
+  @media (max-width:991px) {
+      display: none;
+  }
+}
+.signInImage img {
+  margin: 30px 0px 0px 0px;
+  width: 100%;
+  height: 90vh;
+}
+
+.optScreenCenter {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+
+  .formBg {
+    background: #FFFFFF99;
+    border: 0.47px solid #3ac2ad;
+    border-radius: 10px;
+    padding: 29px;
+    position: relative;
+    z-index: 99;
+
+    @include xxs {
+      padding: 22px;
+    }
+
+    @include xxs {
+      padding: 18px;
+      border-radius: 8px;
+    }
+
+    @include min-max {
+      padding: 15px;
+    }
+
+    .mainContactTitle {
+      margin-bottom: 40px;
+
+      h1 {
+        color: #1CC1A9;
+        text-align: center;
+        font-size: 50px;
+        @include outfit600;
+        line-height: normal;
+        margin-bottom: 40px;
+
+        @media (max-width: 1399px) {
+          font-size: 44px;
+        }
+
+        @include sm {
+          font-size: 40px;
+        }
+      }
+    }
+
+    .otpCenter {
+      justify-content: center;
+
+      .otpText {
+        text-align: center;
+
+        h4 {
+          font-size: 16px;
+          @include outfit400;
+        }
+      }
+
+      .inputotpText {
+        margin-top: 30px;
+      }
+
+      .resendOtp {
+        .resendOtpMessage {
+          margin-top: 10px;
+          text-align: center;
+          @include outfit500;
+          .resendOtpNumber {
+            color: red;
+          }
+
+          .resendOtpText {
+            color: rgba(74, 74, 74, 1);
+            text-decoration: underline;
+          }
+          span{
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .otpBtnSection {
+      margin-top: 40px;
+      text-align: center;
+
+      button {
+        border-radius: 10px;
+        background: var(--1, linear-gradient(90deg, #1CC1A9 0%, #06d37e 100%));
+        padding: 16px 35px;
+        color: #fff;
+        text-align: center;
+        font-size: 18px;
+        @include outfit500;
+        letter-spacing: 0.162px;
+        margin-bottom: 0px;
+        outline: unset;
+        border: unset;
+        width: 201px;
+
+        &:hover {
+          background: linear-gradient(90deg, #06d37e 0%, #1CC1A9 100%);
+          border-radius: 10px;
+        }
+
+        @include lg {
+          padding: 20px 65px;
+        }
+
+        @include sm {
+          font-size: 17px;
+          padding: 16px 25px;
+          border-radius: 8px;
+          width: 180px;
+        }
+
+        @include xs {
+          padding: 14px 23px;
+        }
+
+        @include xxs {
+          font-size: 16px;
+          padding: 14px 14px;
+        }
+
+        @include xxxs {
+          font-size: 15px;
+          padding: 14px 10px;
+        }
+
+        @include tiny {
+          font-size: 14px;
+          padding: 13px 8px;
+          border-radius: 8px;
+          width: 160px;
+        }
+
+
+      }
+    }
+
+    .verifyOtpGridAlignments {
+      gap: 15px;
+      display: flex;
+      justify-content: center;
+
+      @include lg {
+        gap: 6px;
+      }
+
+      @include sm {
+        gap: 10px;
+      }
+
+      @include xxxs {
+        gap: 8px;
+      }
+
+      input {
+        width: 65px;
+        height: 65px;
+        border-radius: 10px;
+        background: #f8f8fb;
+        border: 1px solid getColorHex("orange");
+        border: none;
+        text-align: center;
+        transition: 0.2s ease-in-out;
+        border-radius: 10px;
+        border: 3px solid rgba(255, 255, 255, 0.16);
+        background: white;
+        font-size: 20px;
+        box-shadow: 0px 3px 9px 0px #a0f8eb;
+
+        @include xxxs {
+          width: 50px;
+          height: 50px;
+        }
+
+        &:focus {
+          border: 1px solid #1CC1A9;
+          background: getColorHex("white");
+          outline: none;
+        }
+        @supports (-webkit-touch-callout: none) {
+          @media screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
+            font-size: 16px !important;
+          }
+        }
+      }
+    }
+  }
+}

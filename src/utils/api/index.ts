@@ -1,26 +1,20 @@
 import { BACKEND_KEY } from "../constants";
 
-export interface UserLoginResponse {
+
+export interface AuthTokenResponse {
+    auth_token: string;
+  }
+  
+  export interface ApiResponse<T = any> {
     status: boolean;
-    error?: string;
-    message?: string;
+    message: string;
+    data?: T;
     auth_token?: string;
-    data?: {
-        [key: string]: any;
-    };
-}
+  }
+  
 
-export interface ErrorResponse {   
-    error: string;
-}
-
-export async function handleUserLogin({
-    body
-}: {
-    body: { email: string; password: string }; 
-}) {
-    const url = `${process.env.NEXT_PUBLIC_API_BASEURL}user/login`;
-
+// Helper function for making API calls
+async function apiCall<T = any>(url: string, body: Record<string, any>) {
     try {
         const response = await fetch(url, {
             method: "POST",
@@ -31,9 +25,9 @@ export async function handleUserLogin({
             body: JSON.stringify(body),
         });
 
-        const res: UserLoginResponse = await response.json();
+        const res: ApiResponse<T> = await response.json();
 
-        if (response.status === 200 && res.status) {
+        if (response.ok && res.status) {
             return {
                 isError: false,
                 response: res,
@@ -42,25 +36,32 @@ export async function handleUserLogin({
 
         return {
             isError: true,
-            response: res.error || "An error occurred",
+            response: res.message || "An error occurred",
         };
-
     } catch (error: unknown) {
-        if (error instanceof Error) {
-            return {
-                isError: true,
-                response: error.message || "An unexpected error occurred",
-            };
-        } else {
-
-            return {
-                isError: true,
-                response: "An unexpected error occurred",
-            };
-        }
+        const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred";
+        return {
+            isError: true,
+            response: errorMessage,
+        };
     }
 }
 
+// User Login
+export async function handleUserLogin({ body }: { body: { email: string; password: string } }) {
+    const url = `${process.env.NEXT_PUBLIC_API_BASEURL}user/login`;
+    return await apiCall<ApiResponse<AuthTokenResponse>>(url, body);
+  }
+  
 
-const authApiSingIn = async (query: string, config: any) =>
-  await (await fetch(`/api/auth/signin?${query}`, config)).json();
+// User Signup
+export async function signupNewUser({ body }: { body: { email: string; password: string; userName: string } }) {
+    const url = `${process.env.NEXT_PUBLIC_API_BASEURL}user/create`;
+    return await apiCall<{ email: string }>(url, body);
+}
+
+// Verify OTP
+export async function verifyOtp({ body }: { body: { email: any; otp: string } }) {
+    const url = `${process.env.NEXT_PUBLIC_API_BASEURL}user/verifyOtp`;
+    return await apiCall<ApiResponse<AuthTokenResponse>>(url, body);
+}
