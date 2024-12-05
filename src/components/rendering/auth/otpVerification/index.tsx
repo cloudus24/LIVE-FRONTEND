@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 import Image from "next/image";
 import styles from "./otpVerification.module.scss";
 import React, { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ import { verifyOtp } from "@/utils/api";
 import SignInImage from "@/assets/images/sign-removebg-preview.png";
 
 import { toastError, toastSuccess } from "@/utils";
-import nookies from "nookies"; // Ensure nookies is imported
+import nookies from "nookies";
 
 interface OtpVerificationProps {
   isOnlyVerify: boolean;
@@ -23,7 +23,7 @@ const OtpVerification = ({ isOnlyVerify }: OtpVerificationProps) => {
   const [countdown, setCountdown] = useState(0);
   const router = useRouter();
   const email = Array.isArray(router.query.email) ? router.query.email[0] : router.query.email;
-  console.log('email==========================================>', email);
+  console.log('email======>', email);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -59,32 +59,30 @@ const OtpVerification = ({ isOnlyVerify }: OtpVerificationProps) => {
 
       const apiResponse = response;
       console.log('apiResponse :>> ', apiResponse);
+      debugger;
+      if (JSON.stringify(apiResponse.status)) {
+        debugger;
+        console.log("apiResponse?.status ", apiResponse);
+        toastSuccess("OTP verified successfully!");
 
-      if (apiResponse?.status === true) {
-        console.log('apiResponse?.status ', apiResponse?.status);
-        if (apiResponse.data && apiResponse.data.auth_token) {
-          toastSuccess("OTP verified successfully!");
+        nookies.set(null, "auth_token", JSON.stringify(apiResponse.auth_token), {
+          path: "/",
+          maxAge: 30 * 24 * 60 * 60,
+        });
 
-          nookies.set(null, "auth_token", apiResponse.data.auth_token, {
-            path: "/",
-            maxAge: 30 * 24 * 60 * 60,
-          });
-
+        if (apiResponse.data) {
           nookies.set(null, "user_data", JSON.stringify(apiResponse.data), {
             path: "/",
             maxAge: 30 * 24 * 60 * 60,
           });
-
-          router.push("/folder");
-        } else {
-          console.log("Error: Invalid response structure");
-          toastError("Invalid response structure.");
         }
+        router.push("/folder");
       } else {
-        const errorMessage = apiResponse?.message || "Unknown error.";
+        const errorMessage = "Unknown error.";
         console.log("Error: " + errorMessage);
         toastError("An error occurred: " + errorMessage);
       }
+
 
     } catch (error) {
       toastError("Something went wrong, please try again.");
