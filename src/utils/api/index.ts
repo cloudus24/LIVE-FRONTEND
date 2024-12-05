@@ -50,7 +50,7 @@ async function apiCall<T = any>(url: string, body: Record<string, any>) {
 // User Login
 export async function handleUserLogin({ body }: { body: { email: string; password: string } }) {
     const url = `${process.env.NEXT_PUBLIC_API_BASEURL}user/login`;
-    return await apiCall<ApiResponse<AuthTokenResponse>>(url, body);
+    return await apiCall<ApiResponse<AuthTokenResponse>>(url, body)
   }
   
 
