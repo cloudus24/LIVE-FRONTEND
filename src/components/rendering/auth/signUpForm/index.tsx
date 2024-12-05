@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./signupForm.module.scss";
+import styles from "./signUpForm.module.scss";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Link from "next/link";
