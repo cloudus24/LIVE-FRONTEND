@@ -10,6 +10,7 @@ import SignInImage from "@/assets/images/sign-removebg-preview.png";
 
 import { toastError, toastSuccess } from "@/utils";
 import nookies from "nookies";
+import { setItemInSession } from "@/utils/useHooks/useStorage";
 
 interface OtpVerificationProps {
   isOnlyVerify: boolean;
@@ -71,10 +72,7 @@ const OtpVerification = ({ isOnlyVerify }: OtpVerificationProps) => {
         });
 
         if (apiResponse.data) {
-          nookies.set(null, "user_data", JSON.stringify(apiResponse.data), {
-            path: "/",
-            maxAge: 30 * 24 * 60 * 60,
-          });
+          setItemInSession("userData",(apiResponse.data));
         }
         router.push("/folder");
       } else {
